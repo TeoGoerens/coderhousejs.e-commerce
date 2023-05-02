@@ -5,6 +5,10 @@
   font-family: "Poppins", sans-serif;
 }
 
+body {
+  background-color: aqua;
+}
+
 ul {
   list-style-type: none;
 }
