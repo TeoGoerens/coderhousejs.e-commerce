@@ -71,11 +71,21 @@ const products = [
   },
 ];
 
+const categories = [
+  { id: "champagnes", name: "Champagnes" },
+  { id: "sparklingWines", name: "Sparkling Wines" },
+  { id: "stillWines", name: "Still Wines" },
+  { id: "spirits", name: "Spirits" },
+];
+
 /* I need to define a variable containing the empty div in the HTML whose id is #products */
 const productsContainer = document.querySelector("#products");
+const buttonCategories = document.querySelectorAll(".button__categories");
+const cartContainer = document.querySelector("#cart__container");
 
-function displayProducts() {
-  products.forEach((product) => {
+function displayProducts(filteredProducts) {
+  productsContainer.innerHTML = "";
+  filteredProducts.forEach((product) => {
     /* For each product in the PRODUCTS' array I will be creating a new div to add all the necessary information*/
     const productsCard = document.createElement("div");
     /* For each newly created div, I will assign the corresponding class to make sure that the CSS properties are assigned */
@@ -86,27 +96,70 @@ function displayProducts() {
           <p class="products__card__price">Price: ${product.price}</p>
           <p class="products__card__description">${product.description}</p>
           <p class="products__card__stock">Available stock: ${product.stock}</p>
-          <button class="products__card__button" id="${product.id}">Add to cart</button>`;
+          <button class="products__card__button" id="${product.id}_${product.name}">Add to cart</button>`;
 
     /* Each newly created div with the corresponding information & style should now be included in the HTML in the products' container whose id is #products */
     productsContainer.append(productsCard);
   });
 }
 
-/* I call the displayProducts() function to make sure that the whole information from the PRODUCTS' array is displayed in the HTML */
-displayProducts();
+displayProducts(products);
+
+buttonCategories.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    if (e.currentTarget.id != "allProducts") {
+      const productsFilteredByCategory = products.filter(
+        (product) =>
+          e.currentTarget.id ===
+          categories.filter((category) => category.name === product.category)[0]
+            .id
+      );
+      displayProducts(productsFilteredByCategory);
+    } else {
+      displayProducts(products);
+    }
+  });
+});
 
 /* Now that the whole products are displayed in the HTML, I save in a new variable all the ADD TO CART buttons to make sure I will be able to add an event listener to them */
 const addToCartButtons = document.querySelectorAll(".products__card__button");
+let cartProducts = [];
 
-function addToCart() {
-  addToCartButtons.forEach((button) => {
-    button.addEventListener("click", pushToCart);
-  });
-}
+addToCartButtons.forEach((button) => {
+  button.addEventListener("click", pushToCart);
+});
 
-const cart = [];
 function pushToCart(e) {
-  const id = e.currentTarget.id;
-  console.log(id);
+  const idButton = e.currentTarget.id;
+  const addToCartProduct = products.find(
+    (product) => product.id + "_" + product.name === idButton
+  );
+
+  if (addToCartProduct != undefined && addToCartProduct.stock > 0) {
+    cartProducts.push(addToCartProduct);
+  }
+
+  displayCart();
 }
+
+function displayCart() {
+  const lastCartProducts = cartProducts.slice(-1)[0];
+  const cartProductsCard = document.createElement("div");
+  /* For each newly created div, I will assign the corresponding class to make sure that the CSS properties are assigned */
+  cartProductsCard.classList.add("cartProducts__card");
+  /* Within each newly created div, I will add all the necessary information to be displayed in the card */
+  cartProductsCard.innerHTML = `
+            <h3 class="products__card__title">${lastCartProducts.name}</h3>
+            <p class="products__card__price">Price: ${lastCartProducts.price}</p>
+            <p class="products__card__description">${lastCartProducts.description}</p>`;
+
+  /* Each newly created div with the corresponding information & style should now be included in the HTML in the cart's container */
+  cartContainer.append(cartProductsCard);
+}
+
+/* Empty Cart event listener */
+const emptyCartButton = document.querySelector("#button__emptyCart");
+emptyCartButton.addEventListener("click", () => {
+  cartProducts = [];
+  cartContainer.innerHTML = "";
+});
