@@ -6,14 +6,163 @@
 }
 
 body {
-  background-color: lightgrey;
-}
-
-ul {
-  list-style-type: none;
+  position: relative;
+  background-color: rgba(245, 245, 245, 1);
 }
 
 a {
   text-decoration: none;
-  color: black;
+  color: inherit;
+}
+
+/************** WRAPPER **************/
+
+.wrapper {
+  padding: 0 120px;
+}
+
+/************** HEADER **************/
+
+header {
+  position: sticky;
+  top: 0;
+}
+
+.header__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+  background-color: blueviolet;
+}
+
+.header__title p {
+  display: flex;
+  align-content: center;
+}
+
+.header__title p span {
+  margin-left: 1rem;
+}
+
+nav {
+  background-color: blueviolet;
+}
+
+nav ul {
+  height: 3rem;
+  list-style-type: none;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+nav ul li {
+  width: calc(100% / 6);
+  display: inline-block;
+  height: 100%;
+}
+
+nav ul li .button__categories {
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  font: inherit;
+  color: white;
+  font-weight: 400;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  font-weight: 400;
+}
+
+/************** MAIN **************/
+
+main {
+  margin-top: 5rem;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.products__card {
+  width: clamp(20rem, 35%, 25rem);
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.products__card:hover h3 {
+  color: white;
+  background: blueviolet;
+}
+
+.products__card h3 {
+  text-align: center;
+  padding: 1rem 0;
+  color: blueviolet;
+}
+
+.products__card img {
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  height: 12.5rem;
+}
+
+.products__card__description {
+  text-align: center;
+  padding: 1rem 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.products__card__price,
+.products__card__stock {
+  font-size: 0.8rem;
+  padding: 0 0.5rem;
+  font-weight: 200;
+}
+
+.products__card__price {
+  color: blueviolet;
+  font-weight: 400;
+}
+
+.products__card__button {
+  margin-block: 2rem;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font: inherit;
+  font-size: 0.9rem;
+  width: 50%;
+  height: 30px;
+  align-self: center;
+  border-radius: 20px;
+  border: 1px solid blueviolet;
+  color: blueviolet;
+  transition: all 500ms;
+}
+
+.products__card__button:hover {
+  background-color: blueviolet;
+  color: white;
 }

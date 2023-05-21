@@ -8,7 +8,7 @@ const products = [
     category: "Champagnes",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
-    image: "imgs/domperignon.jpg",
+    image: "imgs/dom-perignon.png",
     stock: 500,
   },
   {
@@ -18,7 +18,7 @@ const products = [
     category: "Sparkling Wines",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
-    image: "imgs/baronb.jpg",
+    image: "imgs/baronb.png",
     stock: 10000,
   },
   {
@@ -28,7 +28,7 @@ const products = [
     category: "Sparkling Wines",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
-    image: "imgs/chandon.jpg",
+    image: "imgs/chandon.png",
     stock: 50000,
   },
   {
@@ -38,7 +38,7 @@ const products = [
     category: "Still Wines",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
-    image: "imgs/latitud.jpg",
+    image: "imgs/latitud-33.png",
     stock: 25000,
   },
   {
@@ -48,7 +48,7 @@ const products = [
     category: "Still Wines",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
-    image: "imgs/terrazasreserva.jpg",
+    image: "imgs/terrazas.png",
     stock: 15000,
   },
   {
@@ -58,7 +58,7 @@ const products = [
     category: "Spirits",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
-    image: "imgs/hennessy.jpg",
+    image: "imgs/hennessy.png",
     stock: 50,
   },
   {
@@ -68,7 +68,7 @@ const products = [
     category: "Spirits",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
-    image: "imgs/belvedere.jpg",
+    image: "imgs/belvedere.png",
     stock: 10,
   },
 ];
@@ -105,12 +105,19 @@ function displayProducts(filteredProducts) {
     const productsCard = document.createElement("div");
     /* For each newly created div, I will assign the corresponding class to make sure that the CSS properties are assigned */
     productsCard.classList.add("products__card");
+    const productPriceFormatted = new Intl.NumberFormat("de-DE").format(
+      product.price
+    );
+    const productStockFormatted = new Intl.NumberFormat("de-DE").format(
+      product.stock
+    );
     /* Within each newly created div, I will add all the necessary information to be displayed in the card */
     productsCard.innerHTML = `
           <h3 class="products__card__title">${product.name}</h3>
-          <p class="products__card__price">Price: ${product.price}</p>
+          <img src="${product.image}" class="products__card__image" alt="${product.name}" />
           <p class="products__card__description">${product.description}</p>
-          <p class="products__card__stock">Available stock: ${product.stock}</p>
+          <p class="products__card__price">Price: $${productPriceFormatted}</p>
+          <p class="products__card__stock">Available stock: ${productStockFormatted}</p>
           <button class="products__card__button" id="${product.id}_${product.name}">Add to cart</button>`;
 
     /* Each newly created div with the corresponding information & style should now be included in the HTML in the products' container whose id is #products */
