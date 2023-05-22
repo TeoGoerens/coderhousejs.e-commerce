@@ -1,5 +1,12 @@
 const cartContainer = document.querySelector("#cart__container");
-let cartProducts = JSON.parse(localStorage.getItem("cartProducts"));
+
+let cartProducts = localStorage.getItem("cartProducts");
+if (cartProducts) {
+  cartProducts = JSON.parse(localStorage.getItem("cartProducts"));
+} else {
+  cartProducts = [];
+}
+
 const emptyCartButton = document.querySelector("#button__emptyCart");
 let cartTotalAmount = document.querySelector("#cart__total");
 
@@ -31,12 +38,15 @@ function displayCart() {
 }
 
 displayCart();
+calculateTotalCartAmount(cartProducts);
 
 /* Empty Cart event listener */
 
 emptyCartButton.addEventListener("click", () => {
   localStorage.removeItem("cartProducts");
   cartContainer.innerHTML = "";
+  cartProducts = [];
+  calculateTotalCartAmount(cartProducts);
 });
 
 function calculateTotalCartAmount(cartProducts) {
@@ -45,7 +55,6 @@ function calculateTotalCartAmount(cartProducts) {
     0
   );
   let totalFormatted = new Intl.NumberFormat("de-DE").format(total);
-  console.log(totalFormatted);
 
   cartTotalAmount.innerHTML = `Total Cart: $${totalFormatted}`;
 }
