@@ -85,9 +85,14 @@ const categories = [
 /* I need to define a variable containing the empty div in the HTML whose id is #products */
 const productsContainer = document.querySelector("#products");
 const buttonCategories = document.querySelectorAll(".button__categories");
-const cartContainer = document.querySelector("#cart__container");
+
 let addToCartButtons = document.querySelectorAll(".products__card__button");
-let cartProducts = [];
+let cartProducts = localStorage.getItem("cartProducts");
+if (cartProducts) {
+  cartProducts = JSON.parse(localStorage.getItem("cartProducts"));
+} else {
+  cartProducts = [];
+}
 
 /* -------------------- USEFUL FUNCTIONS -------------------- */
 
@@ -124,23 +129,6 @@ function displayProducts(filteredProducts) {
     productsContainer.append(productsCard);
   });
   updateCartButtons();
-}
-
-function displayCart(cartProducts) {
-  cartContainer.innerHTML = "";
-  cartProducts.forEach((product) => {
-    const cartProductsCard = document.createElement("div");
-    /* For each newly created div, I will assign the corresponding class to make sure that the CSS properties are assigned */
-    cartProductsCard.classList.add("cartProducts__card");
-    /* Within each newly created div, I will add all the necessary information to be displayed in the card */
-    cartProductsCard.innerHTML = `
-                <h3 class="products__card__title">${product.name}</h3>
-                <p class="products__card__price">Price: ${product.price}</p>
-                <p class="products__card__quantity">${product.quantity}</p>`;
-
-    /* Each newly created div with the corresponding information & style should now be included in the HTML in the cart's container */
-    cartContainer.append(cartProductsCard);
-  });
 }
 
 /* I call the displayProducts() function for the first time to make sure that the products are all loaded when the page is refreshed */
@@ -184,12 +172,6 @@ function pushToCart(e) {
       cartProducts.push(addToCartProduct);
     }
   }
-  displayCart(cartProducts);
-}
 
-/* Empty Cart event listener */
-const emptyCartButton = document.querySelector("#button__emptyCart");
-emptyCartButton.addEventListener("click", () => {
-  cartProducts = [];
-  cartContainer.innerHTML = "";
-});
+  localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+}

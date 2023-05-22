@@ -89,7 +89,7 @@ nav ul li a {
   font-weight: 400;
 }
 
-/************** MAIN **************/
+/************** MAIN STORE **************/
 
 main {
   margin-top: 5rem;
@@ -165,4 +165,83 @@ main {
 .products__card__button:hover {
   background-color: blueviolet;
   color: white;
+}
+
+/************** MAIN CART **************/
+
+.button__emptyCart {
+  margin-block: 2rem;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font: inherit;
+  font-size: 0.9rem;
+  width: 200px;
+  height: 30px;
+  align-self: center;
+  border-radius: 20px;
+  border: 1px solid blueviolet;
+  color: blueviolet;
+  transition: all 500ms;
+}
+
+.button__emptyCart:hover {
+  background-color: blueviolet;
+  color: white;
+}
+
+.cart__container {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.cartProducts__card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: blueviolet 1px solid;
+}
+
+.cartProducts__card:last-child {
+  border-bottom: none;
+}
+
+.cartProducts__card__image {
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  width: 8rem;
+}
+
+.cartProducts__card h3,
+.cartProducts__card p {
+  display: inline-block;
+  width: 100%;
+}
+
+.cartProducts__card__price,
+.cartProducts__card__quantity {
+  font-weight: 200;
+}
+
+.cartProducts__card__total {
+  font-weight: 400;
+  color: blueviolet;
+}
+
+.cart__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart__actions p {
+  font-weight: 800;
+  color: blueviolet;
 }
