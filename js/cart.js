@@ -43,15 +43,43 @@ calculateTotalCartAmount(cartProducts);
 /* Empty Cart event listener */
 
 emptyCartButton.addEventListener("click", () => {
-  localStorage.removeItem("cartProducts");
-  cartContainer.innerHTML = "";
-  cartProducts = [];
-  calculateTotalCartAmount(cartProducts);
+  Swal.fire({
+    title: "Are you sure you want to delete all your products?",
+    icon: "warning",
+    customClass: {
+      title: "sweetalert__title",
+      confirmButton: "sweetalert__content",
+      cancelButton: "sweetalert__content",
+    },
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, delete them!",
+    cancelButtonText: "No, let's keep them!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      localStorage.removeItem("cartProducts");
+      cartContainer.innerHTML = "";
+      cartProducts = [];
+      calculateTotalCartAmount(cartProducts);
+
+      Swal.fire({
+        title: "Done!",
+        text: "Your cart has been emptied!",
+        icon: "success",
+        customClass: {
+          title: "sweetalert__title",
+          htmlContainer: "sweetalert__content",
+          confirmButton: "sweetalert__content",
+        },
+      });
+    }
+  });
 });
 
 function calculateTotalCartAmount(cartProducts) {
   let total = cartProducts.reduce(
-    (acc, producto) => acc + producto.quantity * producto.price,
+    (acc, product) => acc + product.quantity * product.price,
     0
   );
   let totalFormatted = new Intl.NumberFormat("de-DE").format(total);

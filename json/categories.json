@@ -1,0 +1,6 @@
+[
+  { "id": "champagnes", "name": "Champagnes" },
+  { "id": "sparklingWines", "name": "Sparkling Wines" },
+  { "id": "stillWines", "name": "Still Wines" },
+  { "id": "spirits", "name": "Spirits" }
+]

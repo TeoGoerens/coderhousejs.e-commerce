@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "name": "Dom Perignon",
+    "price": 100000,
+    "category": "Champagnes",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
+    "image": "imgs/dom-perignon.png",
+    "stock": 500
+  },
+  {
+    "id": 2,
+    "name": "Baron B",
+    "price": 5000,
+    "category": "Sparkling Wines",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
+    "image": "imgs/baronb.png",
+    "stock": 10000
+  },
+  {
+    "id": 3,
+    "name": "Chandon",
+    "price": 2500,
+    "category": "Sparkling Wines",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
+    "image": "imgs/chandon.png",
+    "stock": 50000
+  },
+  {
+    "id": 4,
+    "name": "Latitud 33",
+    "price": 1500,
+    "category": "Still Wines",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
+    "image": "imgs/latitud-33.png",
+    "stock": 25000
+  },
+  {
+    "id": 5,
+    "name": "Terrazas Reserva",
+    "price": 2500,
+    "category": "Still Wines",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
+    "image": "imgs/terrazas.png",
+    "stock": 15000
+  },
+  {
+    "id": 6,
+    "name": "Hennessy",
+    "price": 12000,
+    "category": "Spirits",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
+    "image": "imgs/hennessy.png",
+    "stock": 50
+  },
+  {
+    "id": 7,
+    "name": "Belvedere",
+    "price": 15000,
+    "category": "Spirits",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
+    "image": "imgs/belvedere.png",
+    "stock": 10
+  }
+]

@@ -1,78 +1,5 @@
 /* -------------------- USEFUL ARRAYS -------------------- */
 
-const products = [
-  {
-    id: 1,
-    name: "Dom Perignon",
-    price: 100000,
-    category: "Champagnes",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
-    image: "imgs/dom-perignon.png",
-    stock: 500,
-  },
-  {
-    id: 2,
-    name: "Baron B",
-    price: 5000,
-    category: "Sparkling Wines",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
-    image: "imgs/baronb.png",
-    stock: 10000,
-  },
-  {
-    id: 3,
-    name: "Chandon",
-    price: 2500,
-    category: "Sparkling Wines",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
-    image: "imgs/chandon.png",
-    stock: 50000,
-  },
-  {
-    id: 4,
-    name: "Latitud 33",
-    price: 1500,
-    category: "Still Wines",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
-    image: "imgs/latitud-33.png",
-    stock: 25000,
-  },
-  {
-    id: 5,
-    name: "Terrazas Reserva",
-    price: 2500,
-    category: "Still Wines",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
-    image: "imgs/terrazas.png",
-    stock: 15000,
-  },
-  {
-    id: 6,
-    name: "Hennessy",
-    price: 12000,
-    category: "Spirits",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
-    image: "imgs/hennessy.png",
-    stock: 50,
-  },
-  {
-    id: 7,
-    name: "Belvedere",
-    price: 15000,
-    category: "Spirits",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, consequatur!",
-    image: "imgs/belvedere.png",
-    stock: 10,
-  },
-];
-
 const categories = [
   { id: "champagnes", name: "Champagnes" },
   { id: "sparklingWines", name: "Sparkling Wines" },
@@ -81,6 +8,15 @@ const categories = [
 ];
 
 /* -------------------- USEFUL VARIABLES -------------------- */
+
+let products;
+fetch("./json/products.json")
+  .then((response) => response.json())
+  .then((data) => {
+    products = data;
+    /* I call the displayProducts() function for the first time to make sure that the products are all loaded when the page is refreshed */
+    displayProducts(products);
+  });
 
 /* I need to define a variable containing the empty div in the HTML whose id is #products */
 const productsContainer = document.querySelector("#products");
@@ -131,10 +67,6 @@ function displayProducts(filteredProducts) {
   updateCartButtons();
 }
 
-/* I call the displayProducts() function for the first time to make sure that the products are all loaded when the page is refreshed */
-
-displayProducts(products);
-
 /* -------------------- USEFUL EVENT LISTENERS -------------------- */
 
 buttonCategories.forEach((button) => {
@@ -160,6 +92,28 @@ function pushToCart(e) {
   );
 
   if (addToCartProduct != undefined && addToCartProduct.stock > 0) {
+    /* Notification after product has been added to cart */
+    Toastify({
+      text: "Product added to cart",
+      duration: 3000,
+      destination: "../cart.html",
+      newWindow: false,
+      close: true,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      style: {
+        background: "linear-gradient(to right, #00b09b, #96c93d)",
+        fontWeight: "200",
+        borderRadius: "5rem",
+        fontSize: "0.75rem",
+      },
+      offset: {
+        x: "2rem", // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+        y: "9rem", // vertical axis - can be a number or a string indicating unity. eg: '2em'
+      },
+      onClick: function () {}, // Callback after click
+    }).showToast();
+
     if (
       cartProducts.some((product) => product.name === addToCartProduct.name)
     ) {

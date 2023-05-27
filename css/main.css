@@ -245,3 +245,11 @@ main {
   font-weight: 800;
   color: blueviolet;
 }
+
+.sweetalert__title {
+  font-size: 1.2rem !important;
+}
+
+.sweetalert__content {
+  font-size: 0.8rem !important;
+}
