@@ -219,10 +219,34 @@ main {
   width: 8rem;
 }
 
-.cartProducts__card h3,
-.cartProducts__card p {
+.cartProducts__card__title,
+.cartProducts__card__price,
+.cartProducts__card__total {
   display: inline-block;
   width: 100%;
+}
+
+.cartProducts__quantity__container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.5rem;
+}
+
+.cartProducts__quantity__increasebutton,
+.cartProducts__quantity__reducebutton {
+  cursor: pointer;
+  background-color: blueviolet;
+  border: none;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: bold;
+  width: 2rem;
+  display: inline-block;
+  align-self: center;
+  border-radius: 7.5px;
+  border: 1px solid blueviolet;
+  color: white;
+  transition: all 500ms;
 }
 
 .cartProducts__card__price,

@@ -7,6 +7,9 @@ if (cartProducts) {
   cartProducts = [];
 }
 
+let reduceItemButton;
+let increaseItemButton;
+
 const emptyCartButton = document.querySelector("#button__emptyCart");
 let cartTotalAmount = document.querySelector("#cart__total");
 
@@ -24,21 +27,66 @@ function displayCart() {
       product.price
     );
     cartProductsCard.innerHTML = `
-        <img src="${product.image}" class="cartProducts__card__image" alt="${product.name}" />              
-        <h3 class="cartProducts__card__title">${product.name}</h3>
-        <p class="cartProducts__card__price">Price: $${cartProductPriceFormatted}</p>
-        <p class="cartProducts__card__quantity">Quantity: ${product.quantity}</p>
-        <p class="cartProducts__card__total">Total: $${totalPerProduct}</p>`;
+    <img src="${product.image}" class="cartProducts__card__image" alt="${product.name}"/>
+    <h3 class="cartProducts__card__title">${product.name}</h3>
+    <p class="cartProducts__card__price">$${cartProductPriceFormatted}</p>
+    <div class="cartProducts__quantity__container">
+        <button class="cartProducts__quantity__reducebutton" id="${product.id}">-</button>
+        <p class="cartProducts__card__quantity">${product.quantity}</p>
+        <button class="cartProducts__quantity__increasebutton" id="${product.id}">+</button>
+    </div>
+    <p class="cartProducts__card__total">Total: $${totalPerProduct}</p>`;
 
     /* Each newly created div with the corresponding information & style should now be included in the HTML in the cart's container */
     cartContainer.append(cartProductsCard);
 
     calculateTotalCartAmount(cartProducts);
+
+    /* Update increase & reduce items' buttons */
+    reduceItemButton = document.querySelectorAll(
+      ".cartProducts__quantity__reducebutton"
+    );
+    increaseItemButton = document.querySelectorAll(
+      ".cartProducts__quantity__increasebutton"
+    );
+
+    increaseItemButton.forEach((button) => {
+      button.addEventListener("click", increaseItem);
+    });
+
+    reduceItemButton.forEach((button) => {
+      button.addEventListener("click", reduceItem);
+    });
   });
 }
 
 displayCart();
-calculateTotalCartAmount(cartProducts);
+
+/* Function increase & reduce item */
+
+function increaseItem(event) {
+  const cartProductIndex = cartProducts.findIndex(
+    (product) => product.id == event.currentTarget.id
+  );
+  cartProducts[cartProductIndex].quantity++;
+
+  localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+  displayCart();
+}
+
+function reduceItem(event) {
+  const cartProductIndex = cartProducts.findIndex(
+    (product) => product.id == event.currentTarget.id
+  );
+  if (cartProducts[cartProductIndex].quantity === 1) {
+    cartProducts.splice(cartProductIndex, 1);
+  } else {
+    cartProducts[cartProductIndex].quantity--;
+  }
+
+  localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+  displayCart();
+}
 
 /* Empty Cart event listener */
 
